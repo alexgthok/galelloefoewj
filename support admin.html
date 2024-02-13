@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Support Page</title>
+    <style>
+        /* Your CSS styling here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #admin-message-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        #admin-reply-form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="admin-message-container"></div>
+    
+    <form id="admin-reply-form">
+        <label for="admin-reply">Your Reply:</label>
+        <textarea id="admin-reply" rows="4" cols="50" required></textarea>
+        <button type="submit">Send Reply</button>
+    </form>
+
+    <script>
+        // Your JavaScript logic here
+        const adminMessageContainer = document.getElementById('admin-message-container');
+        const adminReplyForm = document.getElementById('admin-reply-form');
+        const adminReplyInput = document.getElementById('admin-reply');
+
+        adminReplyForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const adminReply = adminReplyInput.value.trim();
+
+            if (adminReply !== '') {
+                displayMessage('admin', adminReply);
+                // You can add logic here to handle user messages or other actions
+                // For simplicity, this example only displays admin replies.
+            }
+
+            adminReplyInput.value = '';
+        });
+
+        function displayMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.className = sender === 'user' ? 'user-message' : 'admin-message';
+            messageElement.textContent = `${sender === 'user' ? 'You:' : 'Admin:'} ${message}`;
+            adminMessageContainer.appendChild(messageElement);
+        }
+    </script>
+</body>
+</html>
